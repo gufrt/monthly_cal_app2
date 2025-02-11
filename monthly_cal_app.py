@@ -58,7 +58,7 @@ with col1:
 
     if dividend_option == "手入力":
         st.session_state.income["株による配当"] = st.number_input(
-            "株による配当収入", value=0.02, step=0.01
+            "株による配当収入", value=2.50, step=0.01
         )
     else:
         investment_amount = st.number_input("投資額（万円）", value=1000.00, step=1.0)
