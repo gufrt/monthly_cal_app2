@@ -110,7 +110,8 @@ col6, col7 = st.columns([1, 1])
 
 with col6:
     fig, ax = plt.subplots()
-    plt.rcParams["font.family"] = "Meiryo"  # もしくは "MS Gothic" (Windows), "Meiryo"
+    plt.rcParams["font.family"] = ["Noto Sans CJK JP", "Yu Gothic", "Hiragino Sans", "sans-serif"]
+    # plt.rcParams["font.family"] = "Meiryo"  # もしくは "MS Gothic" (Windows), "Meiryo"
     bars = ax.bar(["Income", "Expenses"], [total_income, total_expense], color=['blue', 'red'])
     for bar in bars:
         height = bar.get_height()
@@ -124,7 +125,8 @@ with col7:
     expense_data = {category: sum(items.values()) for category, items in st.session_state.expenses.items() if sum(items.values()) > 0}
     if expense_data:
         fig, ax = plt.subplots()
-        plt.rcParams["font.family"] = "Meiryo"  # もしくは "MS Gothic" (Windows), "Meiryo"
+        plt.rcParams["font.family"] = ["Noto Sans CJK JP", "Yu Gothic", "Hiragino Sans", "sans-serif"]
+        # plt.rcParams["font.family"] = "Meiryo"  # もしくは "MS Gothic" (Windows), "Meiryo"
         wedges, _ = ax.pie(expense_data.values(), startangle=90)
         ax.legend(wedges, expense_data.keys(), title="Expense Categories", loc="center left", bbox_to_anchor=(1, 0.5))
         ax.axis("equal")
