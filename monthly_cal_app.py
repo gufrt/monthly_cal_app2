@@ -104,6 +104,13 @@ for i, (category, items) in enumerate(initial_expenses.items()):
 total_income = sum(st.session_state.income.values())
 total_expense = sum(sum(items.values()) for items in st.session_state.expenses.values())
 
+# **円グラフのデータを小項目ベースで作成**
+expense_details = {}
+for category, items in st.session_state.expenses.items():
+    for item, amount in items.items():
+        if amount > 0:  # 0円の項目は表示しない
+            expense_details[item] = amount
+
 # グラフ表示
 st.markdown("### 収支グラフ")
 col6, col7 = st.columns([1, 1])
@@ -122,14 +129,18 @@ with col6:
     st.pyplot(fig)
 
 with col7:
-    expense_data = {category: sum(items.values()) for category, items in st.session_state.expenses.items() if sum(items.values()) > 0}
-    if expense_data:
-        fig, ax = plt.subplots()
+    if expense_details:
         plt.rcParams["font.family"] = ["Noto Sans CJK JP", "Yu Gothic", "Hiragino Sans", "sans-serif"]
         # plt.rcParams["font.family"] = "Meiryo"  # もしくは "MS Gothic" (Windows), "Meiryo"
-        wedges, _ = ax.pie(expense_data.values(), startangle=90)
-        ax.legend(wedges, expense_data.keys(), title="Expense Categories", loc="center left", bbox_to_anchor=(1, 0.5))
-        ax.axis("equal")
+        fig, ax = plt.subplots(figsize=(6, 6))
+        wedges, texts, autotexts = ax.pie(
+            expense_details.values(),
+            labels=expense_details.keys(),
+            autopct='%1.1f%%',
+            startangle=90,
+            textprops={'fontsize': 10}
+        )
+        ax.axis("equal")  # 円形にする
         st.pyplot(fig)
 
 # CSVダウンロード
