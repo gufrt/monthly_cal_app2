@@ -61,7 +61,7 @@ with col1:
             "株による配当収入", value=0.02, step=0.01
         )
     else:
-        investment_amount = st.number_input("投資額（万円）", value=1000, step=1.0)
+        investment_amount = st.number_input("投資額（万円）", value=1000.00, step=1.0)
         dividend_yield = st.number_input("配当利回り（%）", value=3.0, step=0.1)
         calculated_dividend = (investment_amount * dividend_yield / 100) / 12
         st.session_state.income["株による配当"] = round(calculated_dividend, 2)
