@@ -124,7 +124,7 @@ with col6:
         height = bar.get_height()
         ax.text(bar.get_x() + bar.get_width()/2, height, f"{format_number(height)}", ha='center', va='bottom')
 
-    ax.set_ylabel("Amount (Million Yen)")
+    ax.set_ylabel("Amount (Ten thousand Yen)")
     ax.set_title("Income vs Expenses")
     st.pyplot(fig)
 
